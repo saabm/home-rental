@@ -28,25 +28,57 @@
         .gallery-container {
             width: 100%;
             max-width: 800px;
-            overflow-x: auto;
-            white-space: nowrap;
+            overflow: hidden;
             padding: 10px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #f9f9f9;
         }
         .gallery {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
         .gallery img {
-            height: 200px;
+            width: 100%;
+            height: auto;
             border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Modern Remodel with Gourmet Kitchen & Prime Location Near Rose Garden!</h1>
+    
     <h2>Property Details</h2>
     <div class="property-info">
         <p><strong>Address:</strong> 201 Brooklyn Ave, San Jose, CA 95128</p>
@@ -62,33 +94,23 @@
     <p>This beautifully remodeled San Jose home offers modern style and everyday convenience. Luxury vinyl plank flooring runs throughout, complemented by double-pane windows, recessed lighting, central heating, and air conditioning.</p>
     <p>The open living and dining area flows into a gourmet kitchen featuring a center island with a waterfall quartz countertop, stainless steel appliances, and a gas range with an industrial-strength hood.</p>
     
-    <h2>Amenities</h2>
-    <ul>
-        <li>Central Heating & Air Conditioning</li>
-        <li>Remodeled Kitchen & Bathrooms</li>
-        <li>Attached 2-Car Garage</li>
-        <li>Luxury Vinyl Plank Flooring</li>
-        <li>Gourmet Kitchen with Stainless Steel Appliances</li>
-        <li>Double Pane Windows Throughout</li>
-        <li>Gardener Service Included</li>
-    </ul>
-    
     <h2>Image Gallery</h2>
     <div class="gallery-container">
         <div class="gallery">
-            <img src="images/IMG_4105.jpg" alt="Front view of the home">
-            <img src="images/IMG_4104.jpg" alt="Living room area">
-            <img src="images/IMG_4101.jpg" alt="Kitchen with modern appliances">
-            <img src="images/IMG_4100.jpg" alt="Spacious backyard">
-            <img src="images/IMG_4098.jpg" alt="Bedroom view">
-            <img src="images/IMG_4095.jpg" alt="Bathroom interior">
-            <img src="images/IMG_4094.jpg" alt="Garage space">
-            <img src="images/IMG_4092.jpg" alt="Dining area">
-            <img src="images/IMG_4091.jpg" alt="Hallway">
-            <img src="images/IMG_4090.jpg" alt="Outdoor seating">
-            <img src="images/IMG_4088.jpg" alt="Garden view">
-            <img src="images/IMG_4087.jpg" alt="Home entrance">
+            <img src="images/IMG_4105.jpg" alt="Front view of the home" onclick="openModal(this)">
+            <img src="images/IMG_4104.jpg" alt="Living room area" onclick="openModal(this)">
+            <img src="images/IMG_4101.jpg" alt="Kitchen with modern appliances" onclick="openModal(this)">
+            <img src="images/IMG_4100.jpg" alt="Spacious backyard" onclick="openModal(this)">
+            <img src="images/IMG_4098.jpg" alt="Bedroom view" onclick="openModal(this)">
+            <img src="images/IMG_4095.jpg" alt="Bathroom interior" onclick="openModal(this)">
+            <img src="images/IMG_4094.jpg" alt="Garage space" onclick="openModal(this)">
+            <img src="images/IMG_4092.jpg" alt="Dining area" onclick="openModal(this)">
         </div>
+    </div>
+    
+    <div class="modal" id="imageModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImg">
     </div>
     
     <h2>Pet Policy</h2>
@@ -100,5 +122,15 @@
     
     <h2>Download Flyer</h2>
     <p><a href="201-brooklyn-ave-flyer.pdf" download>📄 Click here to download the flyer</a></p>
+    
+    <script>
+        function openModal(imgElement) {
+            document.getElementById("modalImg").src = imgElement.src;
+            document.getElementById("imageModal").style.display = "flex";
+        }
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
 </body>
 </html>

@@ -28,19 +28,21 @@
         .gallery-container {
             width: 100%;
             max-width: 800px;
-            overflow: hidden;
+            overflow-y: auto;
+            height: 400px;
             padding: 10px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #f9f9f9;
         }
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
         .gallery img {
-            width: 100%;
+            width: 45%;
             height: auto;
             border-radius: 8px;
             cursor: pointer;
@@ -108,7 +110,7 @@
         </div>
     </div>
     
-    <div class="modal" id="imageModal">
+    <div class="modal" id="imageModal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <img id="modalImg">
     </div>

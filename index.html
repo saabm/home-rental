@@ -95,7 +95,7 @@
     <h2>Description</h2>
     <p>This beautifully remodeled San Jose home offers modern style and everyday convenience. Luxury vinyl plank flooring runs throughout, complemented by double-pane windows, recessed lighting, central heating, and air conditioning. The open living and dining area flows into a gourmet kitchen featuring a center island with a waterfall quartz countertop, stainless steel appliances, a gas range with an industrial-strength hood, a dishwasher, refrigerator, and ample cabinet space.</p>
     <p>The remodeled hall bathroom includes double sinks and a stall shower, while the remodeled master bath adds a touch of luxury. Outside, the backyard boasts fruit trees (pomegranate, clementine, lemon, plums, cherries, almonds, peach, and kumquat), creating a peaceful retreat. An attached two-car garage provides secure parking and extra storage.</p>
-    <p>Conveniently located near highways 880, 280, and 87, this home is minutes from Valley Medical, Santana Row, Valley Fair, San Jose International Airport, and Downtown San Jose.</p>
+    <p>Conveniently located near highways 880, 280, and 87, this home is minutes from Valley Medical, Santana Row, Valley Fair, San Jose International Airport, and Downtown San Jose, and less than 5 miles or 15 minutes from major tech headquarters including Apple, Nvidia, Netflix, eBay, Adobe, PayPal, and Intel.</p>
 
     <h2>Amenities</h2>
     <ul>
@@ -138,7 +138,9 @@
     
     <div class="modal" id="imageModal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal()">&times;</span>
+        <span class="modal-nav prev" onclick="prevImage(event)">&#10094;</span>
         <img id="modalImg">
+        <span class="modal-nav next" onclick="nextImage(event)">&#10095;</span>
     </div>
     
     <h2>Pet Policy</h2>
@@ -157,12 +159,30 @@
     <p><a href="201-brooklyn-ave-flyer.pdf" download="201-brooklyn-ave-flyer.pdf">📄 Click here to download the flyer</a></p>
     
     <script>
-        function openModal(imgElement) {
-            document.getElementById("modalImg").src = imgElement.src;
+        let images = [];
+        document.querySelectorAll(".gallery img").forEach((img, index) => {
+            images.push(img.src);
+            img.setAttribute("onclick", `openModal(${index})`);
+        });
+
+        let currentIndex = 0;
+        function openModal(index) {
+            currentIndex = index;
+            document.getElementById("modalImg").src = images[currentIndex];
             document.getElementById("imageModal").style.display = "flex";
         }
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
+        }
+        function nextImage(event) {
+            event.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById("modalImg").src = images[currentIndex];
+        }
+        function prevImage(event) {
+            event.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            document.getElementById("modalImg").src = images[currentIndex];
         }
     </script>
 </body>

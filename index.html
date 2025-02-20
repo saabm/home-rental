@@ -136,10 +136,10 @@
         </div>
     </div>
     
-    <div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal" id="imageModal">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <span class="modal-nav prev" onclick="prevImage(event)">&#10094;</span>
-        <img id="modalImg">
+        <img id="modalImg" onclick="closeModal()"> 
         <span class="modal-nav next" onclick="nextImage(event)">&#10095;</span>
     </div>
     
